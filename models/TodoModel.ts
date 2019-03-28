@@ -1,7 +1,7 @@
 export default class TodoModel {
-    private task: string;
-    private status: boolean;
-    private user: string;
+    public task: string;
+    public status: boolean;
+    public user: string;
 
     public constructor(task: string, status: boolean, user: string) {
         this.task = task;
