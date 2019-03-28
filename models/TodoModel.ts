@@ -3,7 +3,7 @@ export default class TodoModel {
     public status: boolean;
     public user: string;
 
-    public constructor(task: string, status: boolean, user: string) {
+    public constructor(task: string, status: boolean = false, user: string = '') {
         this.task = task;
         this.status = status;
         this.user = user;

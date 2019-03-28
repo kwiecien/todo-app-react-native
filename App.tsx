@@ -4,6 +4,7 @@ import { Hello } from './components/Hello';
 import { CheckBox, SearchBar } from 'react-native-elements';
 import ListViewItem from './components/ListViewItem';
 import TodoModel from './models/TodoModel';
+import ListView from './components/ListView';
 
 interface Props {
 }
@@ -22,6 +23,7 @@ export default class App extends React.Component<Props, State> {
         return (
             <View>
                 <SearchBar />
+                <ListView key='list-view'/>
                 <ListViewItem data={this.todo} dataIndex={0} onCompletedChange={data => (data)} />
             </View>
         );
