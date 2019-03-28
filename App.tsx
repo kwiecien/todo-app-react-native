@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Hello } from './components/Hello';
 import { CheckBox, SearchBar } from 'react-native-elements';
+import ListViewItem from './components/ListViewItem';
+import TodoModel from './models/TodoModel';
 
 interface Props {
 }
@@ -10,18 +12,23 @@ interface State {
 }
 
 export default class App extends React.Component<Props, State> {
+    private todo: TodoModel = {
+        task: "task",
+        status: true,
+        user: "KK"
+    };
+
     render() {
         return (
-            <View style={styles.container}>
+            <View>
                 <SearchBar />
-                <CheckBox checked={true} />
-                <Hello name="Krzysztof" enthusiasmLevel={1} />
+                <ListViewItem data={this.todo} dataIndex={0} onCompletedChange={data => (data)} />
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ // TODO change
     container: {
         flex: 1,
         backgroundColor: '#fff',
