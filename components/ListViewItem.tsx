@@ -1,7 +1,6 @@
 import React from "react";
 import TodoModel from '../models/TodoModel';
 import { CheckBox, ListItem } from 'react-native-elements';
-import { View } from 'react-native';
 
 interface Props {
     data: TodoModel,
