@@ -37,7 +37,7 @@ export default class ListViewItem extends React.Component<Props, State> {
         );
     }
 
-    private onCheckBoxPress(): void {
+    private onCheckBoxPress = (): void => {
         let data = this.state.data;
         data.status = !data.status;
         this.setState({
