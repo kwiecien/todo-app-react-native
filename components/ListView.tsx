@@ -3,7 +3,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import ListViewItem from './ListViewItem';
 import * as Utils from '../utils/Utils';
-import { SearchBar } from 'react-native-elements';
+import OmniBox from './OmniBox';
 
 const dataList = [
     new TodoModel('Hello World'),
@@ -14,7 +14,7 @@ const dataList = [
     new TodoModel('Sync data with Firebase')
 ];
 
-const dataListOrder = getOrder(dataList);
+let dataListOrder = getOrder(dataList);
 
 function getOrder(list: TodoModel[]) {
     return Object.keys(list);
@@ -42,15 +42,21 @@ export default class ListView extends React.Component<Props, State> {
         }
     }
 
-
     public render(): React.ReactNode {
         return (
-            <FlatList // TODO Sortable List View
-                data={dataList}
-                renderItem={({ item }) =>
-                    <ListViewItem data={item} dataIndex={dataListOrder.indexOf(item.task)} onCompletedChange={this.onCompletedChange} />}
-                keyExtractor={this.keyExtractor}
-            />
+            <>
+                <OmniBox
+                    data={this.state.dataList}
+                    updateDataList={this.updateDataList}
+                />
+                <FlatList // TODO Sortable List View
+                    data={dataList}
+                    renderItem={({ item }) => // TODO handle index
+                        <ListViewItem data={item} dataIndex={dataListOrder.indexOf(item.task)}
+                            onCompletedChange={this.onCompletedChange} />}
+                    keyExtractor={this.keyExtractor}
+                />
+            </>
         );
     }
 
@@ -59,6 +65,13 @@ export default class ListView extends React.Component<Props, State> {
     private onCompletedChange(item: TodoModel, index: number) {
         const fromIndex = dataListOrder.indexOf(index.toString());
         const toIndex = item.status ? dataListOrder.length - 1 : 0;
-        moveOrderItem(this, fromIndex, toIndex)
+        moveOrderItem(this, fromIndex, toIndex);
+    }
+
+    private updateDataList = (dataList: TodoModel[]) => {
+        dataListOrder = getOrder(dataList);
+        this.setState({
+            dataList: dataList
+        });
     }
 }
